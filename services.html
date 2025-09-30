@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DigiClick</title>
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+  <div class="brand">
+    <a href="index.html">
+      <img src="logo.png" alt="DigiClick Logo" class="logo">
+    </a>
+    <span class="brand-name">DigiClick</span>
+  </div>
+
+  <nav>
+  <a href="index.html">Home</a>
+  <a href="services.html"class="active">Services</a>
+  <a href="portfolio.html" >Portfolio</a>
+  <a href="contact.html">Contact</a>
+</nav>
+
+</header>
+
+  <section id="services">
+    <h2>Our Services</h2>
+    <div class="services">
+      <div class="service">
+        <h3>🎨 Graphic Design</h3>
+        <p>Logos, branding, illustrations, and visual content that speak your brand language.</p>
+      </div>
+      <div class="service">
+        <h3>💻 Web Development</h3>
+        <p>Responsive, modern websites that engage and convert your audience.</p>
+      </div>
+      <div class="service">
+        <h3>🎬 Video Editing</h3>
+        <p>Creative videos and motion graphics that capture attention instantly.</p>
+      </div>
+    </div>
+  </section>
+  <!-- WhatsApp Floating Button -->
+<a href="https://wa.me/919778237894" target="_blank" class="whatsapp-btn">
+  <img src="whatsap.svg" alt="Chat on WhatsApp">
+</a>
+
+<style>
+/* Floating WhatsApp Button */
+.whatsapp-btn {
+  position: fixed;
+  bottom: 20px;   /* Distance from bottom */
+  right: 20px;    /* Distance from right */
+  z-index: 1000;
+  width: 60px;    /* Button size */
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+}
+
+.whatsapp-btn img {
+  width: 60px;
+  height: 60px;
+}
+
+.whatsapp-btn:hover {
+  transform: scale(1.1);
+}
+</style>
+
+  <footer>
+    <p>© 2025 DigiClick – All Rights Reserved</p>
+  </footer>
+  <script src="script.js"></script>
+  
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DigiClick</title>
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+ <header>
+  <div class="brand">
+    <a href="index.html">
+      <img src="logo.png" alt="DigiClick Logo" class="logo">
+    </a>
+    <span class="brand-name">DigiClick</span>
+  </div>
+
+  <nav>
+  <a href="index.html">Home</a>
+  <a href="services.html">Services</a>
+  <a href="portfolio.html">Portfolio</a>
+  <a href="contact.html" class="active">Contact</a>
+</nav>
+
+</header>
+
+  <section id="contact" class="contact">
+    <h2>Ready to Bring Your Ideas to Life?</h2>
+    <p>Let’s create something amazing together.</p>
+
+  <h1>
+  <a href="https://mail.google.com/mail/?view=cm&fs=1&to=duotsy@gmail.com" target="_blank" class="btn" style="text-decoration:none; color:white; background-color:#00aaff; padding:10px 20px; border-radius:5px;">
+    Contact Us
+  </a>
+</h1>
+    <div class="socials">
+      <a href="#" target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
+  <img src="instagram.png" alt="Instagram" style="width:24px; height:24px; vertical-align:middle;">Instagram</a>|
+<a href="#" target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
+  <img src="linkedin.png" alt="LinkedIn" style="width:24px; height:24px; vertical-align:middle;"> LinkedIn</a>|
+<a href="https://www.youtube.com/@Nahash-z3d" target="_blank" rel="noopener noreferrer" style="text-decoration:none;">
+  <img src="youtube.png" alt="YouTube" style="width:24px; height:24px; vertical-align:middle;">YouTube
+</a>
+<!-- WhatsApp Floating Button -->
+<a href="https://wa.me/919778237894" target="_blank" class="whatsapp-btn">
+  <img src="whatsap.svg" alt="Chat on WhatsApp">
+</a>
+
+<style>
+/* Floating WhatsApp Button */
+.whatsapp-btn {
+  position: fixed;
+  bottom: 20px;   /* Distance from bottom */
+  right: 20px;    /* Distance from right */
+  z-index: 1000;
+  width: 60px;    /* Button size */
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+}
+
+.whatsapp-btn img {
+  width: 60px;
+  height: 60px;
+}
+
+.whatsapp-btn:hover {
+  transform: scale(1.1);
+}
+</style>
+<section id="clients-comments">
+  <h2>What Our Clients Say</h2>
+  
+  <!-- Slider Container -->
+  <div class="slider">
+    <div class="slide active">
+      <p>"DigiClick completely upgraded our website and videos – amazing work!"</p>
+      <h4>- Rahul Menon, Business Owner</h4>
+    </div>
+    <div class="slide">
+      <p>"Very professional team. Their design quality is top-notch."</p>
+      <h4>- Anjali Nair, Startup Founder</h4>
+    </div>
+    <div class="slide">
+      <p>"They helped us reach more customers with creative marketing."</p>
+      <h4>- Mohan Lal, Marketing Head</h4>
+    </div>
+  </div>
+
+  <!-- Add New Comment (Make sure it's HERE) -->
+  <div class="add-comment">
+    <h3>Leave Your Feedback</h3>
+    <form id="commentForm">
+      <input type="text" id="name" placeholder="Your Name">
+      <textarea id="comment" placeholder="Your Comment"></textarea>
+      <button type="submit">Send</button>
+    </form>
+  </div>
+</section>
+<script>
+const slider = document.querySelector(".slider");
+let slides = document.querySelectorAll(".slide");
+
+// Auto Slide Function
+let index = 0;
+function showSlide() {
+  slides.forEach((s, i) => s.classList.remove("active"));
+  slides[index].classList.add("active");
+  index = (index + 1) % slides.length;
+}
+setInterval(showSlide, 4000);
+
+// Comment Handling
+const form = document.getElementById("commentForm");
+
+// Load saved comments on page load
+window.onload = function() {
+  const saved = JSON.parse(localStorage.getItem("comments")) || [];
+  saved.forEach(c => addComment(c.name, c.comment));
+};
+
+// Submit Comment
+form.addEventListener("submit", function(e) {
+  e.preventDefault();
+  const name = document.getElementById("name").value || "Anonymous";
+  const comment = document.getElementById("comment").value || "";
+
+  // Save to localStorage
+  let comments = JSON.parse(localStorage.getItem("comments") || "[]");
+  comments.push({ name, comment });
+  localStorage.setItem("comments", JSON.stringify(comments));
+
+  // Add to slider
+  addComment(name, comment);
+
+  form.reset();
+  alert("Comment submitted!");
+});
+
+function addComment(name, message) {
+  const newSlide = document.createElement("div");
+  newSlide.classList.add("slide");
+  newSlide.innerHTML = `<p>"${message}"</p><h4>- ${name}</h4>`;
+  slider.appendChild(newSlide);
+  slides = document.querySelectorAll(".slide"); // update slides
+}
+</script>
+
+<!-- Footer comes AFTER the comment section -->
+<footer>
+  <p>© 2025 DigiClick – All Rights Reserved</p> 
+</footer>

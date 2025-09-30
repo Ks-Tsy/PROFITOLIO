@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DigiClick</title>
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <a href="index.html">
+        <img src="logo.png" alt="DigiClick Logo" class="logo">
+      </a>
+      <span class="brand-name">DigiClick</span>
+    </div>
+
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="portfolio.html" class="active">Works</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <section id="portfolio">
+    <h2>Our Works</h2>
+    <div class="portfolio-grid" id="portfolioDisplay">
+
+      <!-- Default Static Projects (always visible) -->
+      <div class="portfolio-item">
+        <a href="https://www.examplewebsite1.com" >
+          <img src="12.jpg" alt="Website Project 1">
+          <h3>Websites</h3>
+        </a>
+      </div>
+
+      <div class="portfolio-item">
+        <a href="brand1.jpg">
+          <img src="QUIZ.png" alt="Brand Design 1">
+          <h3>Graphic Designs</h3>
+        </a>
+      </div>
+
+      <div class="portfolio-item">
+        <a href="https://www.youtube.com/watch?v=XXXXXXX" >
+          <img src="v.jpg" alt="Video Project 1">
+          <h3>Videos </h3>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/919778237894" target="_blank" class="whatsapp-btn">
+    <img src="whatsap.svg" alt="Chat on WhatsApp">
+  </a>
+
+  <style>
+    /* Floating WhatsApp Button */
+    .whatsapp-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+    }
+    .whatsapp-btn img {
+      width: 60px;
+      height: 60px;
+    }
+    .whatsapp-btn:hover {
+      transform: scale(1.1);
+    }
+  </style>
+
+  <footer>
+    <p>© 2025 DigiClick – All Rights Reserved</p>
+  </footer>
+
+  <script>
+    // Load dynamic portfolio from admin panel (localStorage)
+    function displayPortfolio() {
+      const container = document.getElementById("portfolioDisplay");
+
+      // Keep static items (first 3) and clear only dynamic part
+      const staticItems = container.innerHTML;
+
+      container.innerHTML = staticItems;
+      const projects = JSON.parse(localStorage.getItem("portfolio")) || [];
+
+      projects.forEach(p => {
+        let item = document.createElement("div");
+        item.className = "portfolio-item";
+
+        if (p.type === "image") {
+          item.innerHTML = `<img src="${p.link}" alt="${p.title}"><h3>${p.title}</h3>`;
+        } else if (p.type === "website") {
+          item.innerHTML = `<a href="${p.link}" target="_blank">${p.title}</a>`;
+        } else if (p.type === "video") {
+          item.innerHTML = `<video controls width="250"><source src="${p.link}" type="video/mp4"></video><h3>${p.title}</h3>`;
+        }
+
+        container.appendChild(item);
+      });
+    }
+
+    displayPortfolio();
+  </script>
+</body>
+</html>

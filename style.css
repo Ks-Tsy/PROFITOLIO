@@ -1,0 +1,358 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  color: #fff;
+  background: #0f0f0f;
+  line-height: 1.6;
+}
+
+/* Header */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 50px;
+  background: rgba(15, 15, 15, 0.9);
+  z-index: 1000;
+}
+
+header h1 {
+  font-size: 1.5rem;
+  color: #00aaff;
+  font-weight: bold;
+}
+
+nav a {
+  color: #fff;
+  margin: 0 15px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+nav a:hover {
+  color: #00aaff;
+}
+
+ .btn {
+  background: #00aaff;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+  display: inline-block;   /* ensures margin works properly */
+  margin: 20px 0;          /* adds space above and below button */
+}
+
+.btn:hover {
+  background: #0088cc;
+}
+
+/* Hero */
+.hero {
+  height: 100vh;
+  background: linear-gradient(135deg, #00aaff, #8a2be2,#e61247d7);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.hero h2 {
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 25px;
+}
+
+/* Sections */
+section {
+  padding: 100px 50px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+section h2 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: #00aaff;
+  text-align: center;
+}
+
+.services, .portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+}
+
+.service, .portfolio-item {
+  background: #1c1c1c;
+  padding: 25px;
+  border-radius: 12px;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.service:hover, .portfolio-item:hover {
+  transform: translateY(-10px);
+  background: #222;
+}
+
+.about, .contact {
+  text-align: center;
+}
+
+footer {
+  background: #111;
+  text-align: center;
+  padding: 30px;
+  margin-top: 50px;
+}
+
+footer p {
+  color: #888;
+}
+
+.socials a {
+  margin: 0 10px;
+  color: #00aaff;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+header {
+  display: flex;
+  justify-content: space-between; /* logo left, nav & button right */
+  align-items: center;
+  padding: 15px 30px;
+  background: #0e0d0d;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* space between logo and text */
+  text-decoration: none;
+}
+
+.logo {
+  height: 50px; 
+  width: auto;
+}
+
+.brand-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #00aaff;
+}
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.portfolio-item {
+  background: #242323;
+  border-radius: 10px;
+  overflow: hidden;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+}
+
+.portfolio-item:hover {
+  transform: translateY(-5px);
+}
+
+.portfolio-item img {
+  width: 100%;
+  height: 180px; /* keeps uniform size */
+  object-fit: cover;
+}
+
+.portfolio-item h3 {
+  padding: 10px;
+  font-size: 1.1rem;
+  color: #fafafa;
+}
+
+.portfolio-item a {
+  text-decoration: none;   /* removes underline */
+  color: inherit;          /* use same color as parent */
+}
+
+.portfolio-item a:hover h3 {
+  color: #e1e9ee;          /* optional: highlight on hover */
+}
+
+nav a {
+  text-decoration: none;
+  color: #00aaff;             /* normal color */
+  padding: 8px 15px;
+  transition: 0.3s;
+}
+
+nav a:hover {
+  color: #fff;          /* hover effect */
+}
+
+nav a.active {
+  color: #fff;          /* selected page color */
+  font-weight: bold;       /* makes it stand out */
+  border-bottom: 2px solid #ff0000; /* optional underline highlight */
+}
+#testimonials {
+  background: #0c0b0b;
+  padding: 40px;
+  text-align: center;
+}
+
+.testimonial-slider {
+  position: relative;
+  max-width: 600px;
+  margin: auto;
+  overflow: hidden;
+}
+
+.testimonial {
+  display: none;
+  padding: 20px;
+  background: rgb(36, 34, 34);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.testimonial.active {
+  display: block;
+}
+
+/* Header links styling */
+nav a.nav-link {
+  margin-left: 25px;
+  text-decoration: none;
+  color: #007bff; /* Blue for unselected pages */
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+nav a.nav-link:hover {
+  color: #ffffff; /* Hover color: red */
+}
+
+nav a.active {
+  color: #fff;          /* selected page color */
+  font-weight: bold;       /* makes it stand out */
+  border-bottom: 2px solid #fff; /* optional underline highlight */
+}
+#clients-comments {
+  background: #000000;
+  margin-top: 60px; /* space from previous content */
+  padding: 40px 20px;
+}
+
+
+#clients-comments h2 {
+  margin-bottom: 20px;
+  font-size: 28px;
+  color: #fff7f7;
+}
+
+/* Slider */
+.slider {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto 40px auto;
+  overflow: hidden;
+  min-height: 150px;
+}
+
+.slide {
+  display: none;
+  padding: 20px;
+  background: rgb(41, 39, 39);
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.slide.active {
+  display: block;
+  animation: fade 1s ease-in-out;
+}
+
+@keyframes fade {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+/* Add Comment Box */
+.add-comment {
+  background: #201e1e;
+  padding: 20px;
+  max-width: 500px;
+  margin: auto;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.add-comment input,
+.add-comment textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #030303;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.add-comment button {
+  width: 100%;
+  padding: 10px;
+  background: #007bff;
+  color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.add-comment button:hover {
+  background: #0056b3;
+}
+input, textarea {
+  background-color: #353333; /* light blue */
+  color: #000000;
+  border: 2px solid #007bff;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: #0056b3; /* darker blue on focus */
+  background-color: #ffffff;
+}
+textarea {
+  resize: none;
+}
+footer {
+  margin-top: 40px;
+  text-align: center;
+  padding: 20px 0;
+  background-color: #0f0f0f;
+}

@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DigiClick Admin Panel - Login</title>
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: linear-gradient(135deg, #00aaff, #8a2be2,#e61247d7);
+      color: #ffffff;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    /* LOGIN MODAL */
+    #loginModal {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    #loginBox {
+  background: linear-gradient(135deg, #00aaff, #8a2be2,#e61247d7);
+  color: #000;
+  padding: 40px;   /* reduced */
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  width: 350px;    /* smaller */
+  text-align: center;
+}
+
+    #loginBox h2 {
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+    #loginBox input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    #loginBox button {
+  width: 300px;           /* set a fixed width */
+  padding: 10px;
+  background: #2575fc;
+  border: none;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s ease;
+  margin: 15px auto 0;    /* centers the button */
+  display: block;         /* required for margin auto */
+  
+}
+
+    #loginBox button:hover {
+      background: #1a5edc;
+    }
+    #errorMsg {
+      color: red;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
+    /* ADMIN PANEL (hidden until login) */
+    #adminPanel {
+      display: none;
+    }
+
+    nav {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    nav button {
+      padding: 12px 25px;
+      margin: 5px;
+      border: none;
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    nav button:hover {
+      background: rgba(255, 255, 255, 0.4);
+    }
+    nav button.active {
+      background: #fff;
+      color: #2575fc;
+    }
+
+    section {
+      display: none;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      max-width: 700px;
+      margin: auto;
+      color: #ffffff;
+    }
+    section.active {
+      display: block;
+      animation: fadeIn 0.5s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .item {
+      margin: 12px 0;
+      padding: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 8px;
+      color: #fff;
+    }
+    label {
+      display: block;
+      margin-top: 12px;
+      font-weight: 500;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      border-radius: 6px;
+      border: none;
+      outline: none;
+      background: rgba(255, 255, 255, 0.2);
+      color: #000000;
+    }
+    input::placeholder, textarea::placeholder {
+      color: #ddd;
+    }
+    button.action {
+      background: #28a745;
+      color: white;
+      margin-top: 15px;
+      padding: 10px 20px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button.action:hover {
+      background: #218838;
+    }
+    .delete-btn {
+      background: #e63946;
+      color: white;
+      padding: 6px 12px;
+      border: none;
+      border-radius: 5px;
+      margin-left: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .delete-btn:hover {
+      background: #c1121f;
+    }
+    a {
+      color: #ffda79;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LOGIN MODAL -->
+  <div id="loginModal">
+    <div id="loginBox">
+      <h2>Admin Login</h2>
+      <input type="text" id="username" placeholder="Username">
+      <input type="password" id="password" placeholder="Password">
+      <button onclick="login()">Login</button>
+      <p id="errorMsg"></p>
+    </div>
+  </div>
+
+  <!-- ADMIN PANEL -->
+  <div id="adminPanel">
+    <h1>🚀 DigiClick Admin Panel</h1>
+    <nav>
+      <button onclick="showTab('home')">Home</button>
+      <button onclick="showTab('services')">Services</button>
+      <button onclick="showTab('portfolio')">Portfolio</button>
+      <button onclick="showTab('contact')">Client Comments</button>
+    </nav>
+
+    <!-- HOME -->
+    <section id="home">
+      <h2>Manage Home Page</h2>
+      <label>Headline</label>
+      <input type="text" id="homeHeadline" placeholder="Enter headline">
+      <label>Subheadline</label>
+      <textarea id="homeSubheadline" placeholder="Enter subheadline"></textarea>
+      <label>Hero Image URL</label>
+      <input type="text" id="homeHero" placeholder="Enter image URL">
+      <button class="action" onclick="saveHome()">Save Home Content</button>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services">
+      <h2>Manage Services</h2>
+      <label>Service Title</label>
+      <input type="text" id="serviceTitle" placeholder="Enter service title">
+      <label>Description</label>
+      <textarea id="serviceDesc" placeholder="Enter service description"></textarea>
+      <button class="action" onclick="addService()">Add Service</button>
+      <div id="servicesList"></div>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section id="portfolio">
+      <h2>Manage Portfolio</h2>
+      <label>Type</label>
+      <select id="portfolioType">
+        <option value="image">Image</option>
+        <option value="website">Website</option>
+        <option value="video">Video</option>
+      </select>
+      <label>Title</label>
+      <input type="text" id="portfolioTitle" placeholder="Enter project title">
+      <label>Link / URL</label>
+      <input type="text" id="portfolioLink" placeholder="Enter project link">
+      <button class="action" onclick="addPortfolio()">Add Portfolio Item</button>
+      <div id="portfolioList"></div>
+    </section>
+
+    <!-- COMMENTS -->
+    <section id="contact">
+      <h2>Manage Client Comments</h2>
+      <label>Client Name</label>
+      <input type="text" id="clientName" placeholder="Enter client name">
+      <label>Comment</label>
+      <textarea id="clientComment" placeholder="Enter client comment"></textarea>
+      <button class="action" onclick="addComment()">Add Comment</button>
+      <div id="commentsList"></div>
+    </section>
+  </div>
+
+  <script>
+    // --- LOGIN ---
+    function login() {
+      const user = document.getElementById("username").value;
+      const pass = document.getElementById("password").value;
+      const errorMsg = document.getElementById("errorMsg");
+
+      // simple hardcoded login (you can change)
+      if (user === "Nahash" && pass === "2009") {
+        document.getElementById("loginModal").style.display = "none";
+        document.getElementById("adminPanel").style.display = "block";
+        showTab('home');
+      } else {
+        errorMsg.textContent = "❌ Invalid Username or Password!";
+      }
+    }
+
+    // --- TAB SWITCHING ---
+    function showTab(tabId) {
+      document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
+      document.querySelectorAll("nav button").forEach(b => b.classList.remove("active"));
+      document.getElementById(tabId).classList.add("active");
+      document.querySelector(`nav button[onclick="showTab('${tabId}')"]`).classList.add("active");
+    }
+
+    // --- STORAGE FUNCTIONS (unchanged) ---
+    function saveHome() {
+      const data = {
+        headline: document.getElementById("homeHeadline").value,
+        subheadline: document.getElementById("homeSubheadline").value,
+        hero: document.getElementById("homeHero").value
+      };
+      localStorage.setItem("homeContent", JSON.stringify(data));
+      alert("✅ Home content saved!");
+    }
+
+    function loadServices() {
+      const list = document.getElementById("servicesList");
+      list.innerHTML = "";
+      const services = JSON.parse(localStorage.getItem("services")) || [];
+      services.forEach((s, i) => {
+        let div = document.createElement("div");
+        div.className = "item";
+        div.innerHTML = `<strong>${s.title}</strong><p>${s.desc}</p>
+        <button class="delete-btn" onclick="deleteService(${i})">Delete</button>`;
+        list.appendChild(div);
+      });
+    }
+    function addService() {
+      const title = document.getElementById("serviceTitle").value;
+      const desc = document.getElementById("serviceDesc").value;
+      if (!title || !desc) return alert("Fill both fields!");
+      const services = JSON.parse(localStorage.getItem("services")) || [];
+      services.push({ title, desc });
+      localStorage.setItem("services", JSON.stringify(services));
+      loadServices();
+    }
+    function deleteService(i) {
+      const services = JSON.parse(localStorage.getItem("services")) || [];
+      services.splice(i, 1);
+      localStorage.setItem("services", JSON.stringify(services));
+      loadServices();
+    }
+
+    function loadPortfolio() {
+      const list = document.getElementById("portfolioList");
+      list.innerHTML = "";
+      const projects = JSON.parse(localStorage.getItem("portfolio")) || [];
+      projects.forEach((p, i) => {
+        let div = document.createElement("div");
+        div.className = "item";
+        div.innerHTML = `<strong>${p.title}</strong> (${p.type}) 
+        <a href="${p.link}" target="_blank">View</a>
+        <button class="delete-btn" onclick="deletePortfolio(${i})">Delete</button>`;
+        list.appendChild(div);
+      });
+    }
+    function addPortfolio() {
+      const type = document.getElementById("portfolioType").value;
+      const title = document.getElementById("portfolioTitle").value;
+      const link = document.getElementById("portfolioLink").value;
+      if (!title || !link) return alert("Fill all fields!");
+      const projects = JSON.parse(localStorage.getItem("portfolio")) || [];
+      projects.push({ type, title, link });
+      localStorage.setItem("portfolio", JSON.stringify(projects));
+      loadPortfolio();
+    }
+    function deletePortfolio(i) {
+      const projects = JSON.parse(localStorage.getItem("portfolio")) || [];
+      projects.splice(i, 1);
+      localStorage.setItem("portfolio", JSON.stringify(projects));
+      loadPortfolio();
+    }
+
+    function loadComments() {
+      const list = document.getElementById("commentsList");
+      list.innerHTML = "";
+      const comments = JSON.parse(localStorage.getItem("comments")) || [];
+      comments.forEach((c, i) => {
+        let div = document.createElement("div");
+        div.className = "item";
+        div.innerHTML = `<strong>${c.name}</strong>: ${c.comment}
+        <button class="delete-btn" onclick="deleteComment(${i})">Delete</button>`;
+        list.appendChild(div);
+      });
+    }
+    function addComment() {
+      const name = document.getElementById("clientName").value;
+      const comment = document.getElementById("clientComment").value;
+      if (!name || !comment) return alert("Fill both fields!");
+      const comments = JSON.parse(localStorage.getItem("comments")) || [];
+      comments.push({ name, comment });
+      localStorage.setItem("comments", JSON.stringify(comments));
+      loadComments();
+    }
+    function deleteComment(i) {
+      const comments = JSON.parse(localStorage.getItem("comments")) || [];
+      comments.splice(i, 1);
+      localStorage.setItem("comments", JSON.stringify(comments));
+      loadComments();
+    }
+
+    loadServices();
+    loadPortfolio();
+    loadComments();
+
+  // Trigger button click on Enter key
+  document.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+      // Find the first visible button
+      const button = document.querySelector("button");
+      if (button) {
+        button.click();
+      }
+    }
+  });
+</script>
+
+
+</body>
+</html>
